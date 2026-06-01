@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #181818;
+  --accent-white: #ffffff;
+  --accent-light: #e5e5e5;
+  --accent-gold: #d4af37;
+  --text-primary: #ffffff;
+  --text-secondary: #bdbdbd;
+  --text-muted: #666666;
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-cormorant);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection {
+  background: rgba(212, 175, 55, 0.25);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* ── Typography ─────────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #bdbdbd 50%, #666666 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #f5e17a 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glass ──────────────────────────────────────────────────────── */
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-gold {
+  background: rgba(212, 175, 55, 0.04);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+/* ── Noise overlay ──────────────────────────────────────────────── */
+
+.noise-bg {
+  position: relative;
+}
+.noise-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ── Utility ────────────────────────────────────────────────────── */
+
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.clip-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+
+.clip-reveal-done {
+  clip-path: inset(0 0% 0 0);
+}
+
+.img-cover {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.section-padding {
+  padding: 8rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 10rem 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-padding {
+    padding: 12rem 8rem;
+  }
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-14px) rotate(0.4deg); }
+  66%       { transform: translateY(7px) rotate(-0.3deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.08); }
+  50%       { box-shadow: 0 0 60px rgba(212, 175, 55, 0.25); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  30%       { transform: translate(2%, 1%); }
+  50%       { transform: translate(-1%, 2%); }
+  70%       { transform: translate(3%, -1%); }
+  90%       { transform: translate(-2%, 3%); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes blade-in {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes blade-out {
+  from { transform: scaleX(1); transform-origin: right; }
+  to   { transform: scaleX(0); transform-origin: right; }
+}
+
+/* ── Animation classes ──────────────────────────────────────────── */
+
+.animate-float        { animation: float 7s ease-in-out infinite; }
+.animate-pulse-glow   { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-marquee      { animation: marquee var(--duration, 30s) linear infinite; }
+.animate-marquee-slow { animation: marquee var(--duration, 50s) linear infinite; }
+
+/* ── Horizontal gallery scroll ─────────────────────────────────── */
+
+.horizontal-scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.horizontal-scroll-container:active {
+  cursor: grabbing;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Grain overlay ──────────────────────────────────────────────── */
+
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.06'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 9997;
+  mix-blend-mode: overlay;
+  animation: grain 6s steps(1) infinite;
+}
+
+/* ── Glow effects ───────────────────────────────────────────────── */
+
+.glow-gold {
+  box-shadow:
+    0 0 40px rgba(212, 175, 55, 0.15),
+    0 0 80px rgba(212, 175, 55, 0.05);
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.match\\(/instagram|twitter|linkedin|x$/i\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); const keys = Object.keys\\(l\\); console.log\\(keys.filter\\(k => !k.startsWith\\('Lucide'\\)\\).filter\\(k => k.match\\(/^\\(Instagram|Twitter|Linkedin|Github|Facebook|Youtube|Globe|Link|Share\\)/i\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(npm run *)"
+    ]
+  }
+}
