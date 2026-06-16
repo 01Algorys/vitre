@@ -8,7 +8,7 @@ export const projects: Project[] = [
     year: "2024",
     description:
       "A dawn ceremony on the Tunisian coast — golden light breaking over the sea just as two lives became one. Every frame a quiet miracle.",
-    image: "/IMG_3238.jpg",
+    image: "/L1021465.jpeg",
     tags: ["Wedding", "Golden Hour", "Coast"],
     featured: true,
   },
