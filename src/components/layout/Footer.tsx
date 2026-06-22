@@ -91,6 +91,7 @@ export default function Footer() {
             >
               +216 20 802 314
             </a>
+            <br />
             <a
               href="https://wa.me/33752999651"
               target="_blank"
