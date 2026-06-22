@@ -33,6 +33,12 @@ const SOCIALS = [
     label: "+216 20 802 314",
     sub: "WhatsApp available",
   },
+  {
+    icon: Phone,
+    href: "https://wa.me/33752999651",
+    label: "+33 7 52 99 96 51",
+    sub: "WhatsApp available",
+  },
 ];
 
 type FormState = { name: string; email: string; project: string; message: string };

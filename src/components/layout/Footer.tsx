@@ -91,6 +91,14 @@ export default function Footer() {
             >
               +216 20 802 314
             </a>
+            <a
+              href="https://wa.me/33752999651"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light"
+            >
+              +33 7 52 99 96 51
+            </a>
           </motion.div>
         </div>
 
