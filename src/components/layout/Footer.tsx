@@ -42,8 +42,7 @@ export default function Footer() {
           <motion.div variants={fadeUp}>
             <h3 className="font-display text-3xl text-white mb-5 font-light">Cherif Ouali</h3>
             <p className="text-[#555] text-sm leading-relaxed max-w-xs">
-              Photographer &amp; visual artist based in Tunisia and Paris.
-              Telling stories through light, emotion, and the spaces between moments.
+             Wedding & Fashion Photographer
             </p>
           </motion.div>
 

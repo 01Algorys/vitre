@@ -12,7 +12,7 @@ import {
 const STATS = [
   { value: "157K", label: "Instagram followers" },
   { value: "561+", label: "Stories captured" },
-  { value: "6+",   label: "Years of experience" },
+  { value: "10",   label: "Years of experience" },
   { value: "2",    label: "Countries, one vision" },
 ];
 
