@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { testimonials } from "@/lib/data";
+import type { Testimonial } from "@/types";
+import { testimonials as defaultTestimonials } from "@/lib/data";
 import { fadeUp, staggerContainer, viewportConfig } from "@/lib/animations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -9,40 +10,34 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const variants = {
-  enter: (d: number) => ({
-    x: d > 0 ? 60 : -60,
-    opacity: 0,
-    filter: "blur(10px)",
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    filter: "blur(0px)",
-    transition: { duration: 0.75, ease: EASE },
-  },
-  exit: (d: number) => ({
-    x: d > 0 ? -60 : 60,
-    opacity: 0,
-    filter: "blur(10px)",
-    transition: { duration: 0.35 },
-  }),
+  enter:  (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0, filter: "blur(10px)" }),
+  center: { x: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.75, ease: EASE } },
+  exit:   (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0, filter: "blur(10px)", transition: { duration: 0.35 } }),
 };
 
-export default function Testimonials() {
+interface Props { testimonials?: Testimonial[] }
+
+export default function Testimonials({ testimonials = defaultTestimonials }: Props) {
   const [current, setCurrent] = useState(0);
   const [dir, setDir]         = useState(1);
+
+  const list = testimonials.length > 0 ? testimonials : defaultTestimonials;
+
+  useEffect(() => {
+    setCurrent(0);
+  }, [testimonials]);
 
   useEffect(() => {
     const t = setInterval(() => {
       setDir(1);
-      setCurrent((p) => (p + 1) % testimonials.length);
+      setCurrent((p) => (p + 1) % list.length);
     }, 7000);
     return () => clearInterval(t);
-  }, []);
+  }, [list.length]);
 
   const navigate = (d: number) => {
     setDir(d);
-    setCurrent((p) => (p + d + testimonials.length) % testimonials.length);
+    setCurrent((p) => (p + d + list.length) % list.length);
   };
 
   return (
@@ -86,23 +81,22 @@ export default function Testimonials() {
               exit="exit"
               className="w-full"
             >
-              {/* Opening quote mark */}
               <div className="font-display text-[8rem] leading-none text-[#d4af37]/12 select-none mb-0 -mt-8">
                 &ldquo;
               </div>
 
               <blockquote className="font-display text-[clamp(1.2rem,3vw,2.2rem)] text-white leading-relaxed mb-10 -mt-4">
-                {testimonials[current].text}
+                {list[current]?.text}
               </blockquote>
 
               <div className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#222] to-[#111] border border-white/8 flex items-center justify-center text-base font-medium text-white font-display">
-                  {testimonials[current].name.charAt(0)}
+                  {list[current]?.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-white text-sm font-light">{testimonials[current].name}</p>
+                  <p className="text-white text-sm font-light">{list[current]?.name}</p>
                   <p className="text-[#555] text-xs tracking-wide">
-                    {testimonials[current].role} — {testimonials[current].company}
+                    {list[current]?.role} — {list[current]?.company}
                   </p>
                 </div>
               </div>
@@ -112,35 +106,22 @@ export default function Testimonials() {
 
         {/* Controls */}
         <div className="flex items-center justify-between mt-14">
-
-          {/* Dot indicators */}
           <div className="flex items-center gap-2">
-            {testimonials.map((_, i) => (
+            {list.map((_, i) => (
               <button
                 key={i}
                 onClick={() => { setDir(i > current ? 1 : -1); setCurrent(i); }}
                 className="h-px transition-all duration-500 cursor-none"
-                style={{
-                  width: i === current ? 28 : 14,
-                  background: i === current ? "#fff" : "rgba(255,255,255,0.15)",
-                }}
+                style={{ width: i === current ? 28 : 14, background: i === current ? "#fff" : "rgba(255,255,255,0.15)" }}
                 data-cursor-hover
               />
             ))}
           </div>
-
-          {/* Arrows */}
           <div className="flex gap-2">
-            <MagneticButton
-              onClick={() => navigate(-1)}
-              className="w-11 h-11 border border-white/12 hover:border-white/40 rounded-full flex items-center justify-center text-[#777] hover:text-white transition-all duration-300"
-            >
+            <MagneticButton onClick={() => navigate(-1)} className="w-11 h-11 border border-white/12 hover:border-white/40 rounded-full flex items-center justify-center text-[#777] hover:text-white transition-all duration-300">
               <ChevronLeft size={14} />
             </MagneticButton>
-            <MagneticButton
-              onClick={() => navigate(1)}
-              className="w-11 h-11 border border-white/12 hover:border-white/40 rounded-full flex items-center justify-center text-[#777] hover:text-white transition-all duration-300"
-            >
+            <MagneticButton onClick={() => navigate(1)}  className="w-11 h-11 border border-white/12 hover:border-white/40 rounded-full flex items-center justify-center text-[#777] hover:text-white transition-all duration-300">
               <ChevronRight size={14} />
             </MagneticButton>
           </div>

@@ -3,22 +3,37 @@ import { motion } from "framer-motion";
 import { Globe, Share2, Phone, Mail } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { fadeUp, staggerContainer, viewportConfig } from "@/lib/animations";
+import type { FooterContent } from "@/types";
 
-const SOCIALS = [
-  { icon: Globe,  href: "https://www.instagram.com/cherifouali",          label: "Instagram" },
-  { icon: Share2, href: "https://www.instagram.com/cherifouali_weddings",  label: "Weddings" },
-  { icon: Phone,  href: "https://wa.me/21620802314",                       label: "WhatsApp" },
-  { icon: Mail,   href: "mailto:hello@CherifOuali.com",                    label: "Email" },
-];
+const DEFAULT: FooterContent = {
+  name: "Cherif Ouali",
+  tagline: "Wedding & Fashion Photographer",
+  copyright: "©2019 — 2025 Cherif Ouali. All rights reserved.",
+  locationTag: "Photography Portfolio — Tunisia & Paris",
+  links: [
+    { label: "Work",     href: "#work" },
+    { label: "About",   href: "#about" },
+    { label: "Services",href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ],
+  socials: [
+    { type: "instagram", href: "https://www.instagram.com/cherifouali",          label: "Instagram" },
+    { type: "weddings",  href: "https://www.instagram.com/cherifouali_weddings", label: "Weddings" },
+    { type: "whatsapp",  href: "https://wa.me/21620802314",                      label: "WhatsApp" },
+    { type: "email",     href: "mailto:hello@CherifOuali.com",                   label: "Email" },
+  ],
+};
 
-const FOOTER_LINKS = [
-  { label: "Work",     href: "#work" },
-  { label: "About",   href: "#about" },
-  { label: "Services",href: "#services" },
-  { label: "Contact", href: "#contact" },
-];
+function socialIcon(type: string) {
+  if (type === "email")   return <Mail   size={13} />;
+  if (type === "whatsapp") return <Phone  size={13} />;
+  if (type === "weddings") return <Share2 size={13} />;
+  return <Globe size={13} />;
+}
 
-export default function Footer() {
+interface Props { data?: FooterContent }
+
+export default function Footer({ data = DEFAULT }: Props) {
   return (
     <footer className="relative bg-[#0a0a0a] border-t border-white/[0.04] py-20 px-6 md:px-10 lg:px-16 overflow-hidden">
 
@@ -40,22 +55,17 @@ export default function Footer() {
 
           {/* Brand */}
           <motion.div variants={fadeUp}>
-            <h3 className="font-display text-3xl text-white mb-5 font-light">Cherif Ouali</h3>
-            <p className="text-[#555] text-sm leading-relaxed max-w-xs">
-             Wedding & Fashion Photographer
-            </p>
+            <h3 className="font-display text-3xl text-white mb-5 font-light">{data.name}</h3>
+            <p className="text-[#555] text-sm leading-relaxed max-w-xs">{data.tagline}</p>
           </motion.div>
 
           {/* Navigation */}
           <motion.div variants={fadeUp}>
             <h4 className="text-[10px] tracking-[0.4em] uppercase text-[#444] mb-6">Navigation</h4>
             <ul className="space-y-3">
-              {FOOTER_LINKS.map((link) => (
+              {data.links.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light"
-                  >
+                  <a href={link.href} className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light">
                     {link.label}
                   </a>
                 </li>
@@ -67,39 +77,30 @@ export default function Footer() {
           <motion.div variants={fadeUp}>
             <h4 className="text-[10px] tracking-[0.4em] uppercase text-[#444] mb-6">Connect</h4>
             <div className="flex gap-3 mb-6">
-              {SOCIALS.map(({ icon: Icon, href, label }) => (
+              {data.socials.map(({ type, href, label }) => (
                 <MagneticButton
                   key={label}
                   href={href}
                   className="w-10 h-10 border border-white/8 hover:border-[#d4af37]/40 rounded-full flex items-center justify-center text-[#555] hover:text-white transition-all duration-300"
                 >
-                  <Icon size={13} />
+                  {socialIcon(type)}
                 </MagneticButton>
               ))}
             </div>
-            <a
-              href="mailto:hello@CherifOuali.com"
-              className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light block mb-2"
-            >
-              hello@CherifOuali.com
-            </a>
-            <a
-              href="https://wa.me/21620802314"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light"
-            >
-              +216 20 802 314
-            </a>
-            <br />
-            <a
-              href="https://wa.me/33752999651"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light"
-            >
-              +33 7 52 99 96 51
-            </a>
+            {data.socials
+              .filter((s) => s.type === "email")
+              .map((s) => (
+                <a key={s.href} href={s.href} className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light block mb-2">
+                  {s.href.replace("mailto:", "")}
+                </a>
+              ))}
+            {data.socials
+              .filter((s) => s.type === "whatsapp")
+              .map((s) => (
+                <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer" className="text-sm text-[#666] hover:text-white transition-colors duration-300 font-light block">
+                  {s.label}
+                </a>
+              ))}
           </motion.div>
         </div>
 
@@ -108,12 +109,8 @@ export default function Footer() {
           variants={fadeUp}
           className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/[0.04] gap-4"
         >
-          <p className="text-[10px] text-[#333] tracking-[0.35em] uppercase">
-            ©2019 — 2025 Cherif Ouali. All rights reserved.
-          </p>
-          <p className="text-[10px] text-[#333] tracking-widest uppercase">
-            Photography Portfolio — Tunisia &amp; Paris
-          </p>
+          <p className="text-[10px] text-[#333] tracking-[0.35em] uppercase">{data.copyright}</p>
+          <p className="text-[10px] text-[#333] tracking-widest uppercase">{data.locationTag}</p>
         </motion.div>
       </motion.div>
     </footer>

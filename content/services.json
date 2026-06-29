@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Wedding Photography",
+    "description": "Your wedding day told as a cinematic story. From quiet morning preparations to the last dance — every detail, every tear, every laugh, preserved forever with intention and artistry.",
+    "icon": "camera",
+    "price": ""
+  },
+  {
+    "id": "2",
+    "title": "Portrait Sessions",
+    "description": "Intimate, unhurried portrait sessions that reveal who you truly are. Studio or location — in Tunisia or Paris — crafted around your personality, your light, your story.",
+    "icon": "user",
+    "price": ""
+  },
+  {
+    "id": "3",
+    "title": "Fashion & Editorial",
+    "description": "High-fashion campaign and editorial work that marries clothing with architecture and landscape. A visual language built on contrast, mood, and Mediterranean light.",
+    "icon": "briefcase",
+    "price": ""
+  },
+  {
+    "id": "4",
+    "title": "Commercial & Brand",
+    "description": "Brand-defining imagery for companies, hotels, and cultural institutions. Photography that elevates your product from commodity to story — seen, felt, and remembered.",
+    "icon": "building",
+    "price": ""
+  }
+]

@@ -2,29 +2,37 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import {
-  fadeUp,
-  slideRight,
-  staggerContainer,
-  viewportConfig,
-} from "@/lib/animations";
+import { fadeUp, slideRight, staggerContainer, viewportConfig } from "@/lib/animations";
+import type { AboutContent } from "@/types";
 
-const STATS = [
-  { value: "157K", label: "Instagram followers" },
-  { value: "561+", label: "Stories captured" },
-  { value: "10",   label: "Years of experience" },
-  { value: "2",    label: "Countries, one vision" },
-];
+const DEFAULT: AboutContent = {
+  heading: "When photography is not all about just taking photos, but telling a story.",
+  bio1: "I'm Cherif Ouali — a photographer and visual artist living between Tunisia and Paris. For six years I've been chasing light: at dawn on Mediterranean shores, in the warm gold of a Tunisian courtyard, in the rain-slicked streets of the Marais at midnight.",
+  bio2: "My work spans weddings, portraits, fashion, and fine art — but every image shares the same intention: to preserve not just what happened, but how it felt. With 157K followers trusting my eye on Instagram, and a second account dedicated entirely to weddings (@cherifouali_weddings), storytelling is the thread connecting everything I create.",
+  stats: [
+    { value: "157K", label: "Instagram followers" },
+    { value: "561+", label: "Stories captured" },
+    { value: "10",   label: "Years of experience" },
+    { value: "2",    label: "Countries, one vision" },
+  ],
+  location: "Based in Tunisia & Paris",
+  availabilityBadge: "Available for bookings",
+  photo: "/_CAR1188 copy.jpeg",
+};
 
-export default function About() {
+interface Props { data?: AboutContent }
+
+export default function About({ data = DEFAULT }: Props) {
   const ref    = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
-
-  const [imgSrc, setImgSrc] = useState("/_CAR1188 copy.jpeg");
+  const [imgError, setImgError] = useState(false);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const imgY    = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const bgTextX = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+
+  // Build the display heading: wrap last line in italic gold
+  const headingLines = data.heading.split("\n");
 
   return (
     <section id="about" ref={ref} className="relative bg-[#0a0a0a] section-padding overflow-hidden">
@@ -63,7 +71,6 @@ export default function About() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            {/* Clip-mask reveal */}
             <motion.div
               className="relative aspect-[3/4] overflow-hidden rounded-sm"
               initial={{ clipPath: "inset(0 100% 0 0)" }}
@@ -71,18 +78,14 @@ export default function About() {
               viewport={{ once: true, margin: "-15% 0px" }}
               transition={{ duration: 1.3, ease: [0.76, 0, 0.24, 1] }}
             >
-              <motion.div
-                ref={imgRef}
-                className="absolute inset-[-12%]"
-                style={{ y: imgY }}
-              >
+              <motion.div ref={imgRef} className="absolute inset-[-12%]" style={{ y: imgY }}>
                 <Image
-                  src={imgSrc}
+                  src={imgError ? "/L1020678.jpeg" : data.photo}
                   alt="Cherif Ouali — Photographer"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  onError={() => setImgSrc("/L1020678.jpeg")}
+                  onError={() => setImgError(true)}
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/50 to-transparent" />
@@ -96,9 +99,11 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="font-display text-4xl text-white leading-none">157K</div>
+              <div className="font-display text-4xl text-white leading-none">
+                {data.stats[0]?.value ?? "157K"}
+              </div>
               <div className="text-[10px] text-[#888] tracking-[0.3em] uppercase mt-1.5">
-                Instagram Followers
+                {data.stats[0]?.label ?? "Instagram Followers"}
               </div>
             </motion.div>
 
@@ -119,39 +124,42 @@ export default function About() {
             whileInView="visible"
             viewport={viewportConfig}
           >
-            {/* Main quote — his actual tagline */}
+            {/* Quote */}
             <motion.h2
               variants={fadeUp}
               className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-white mb-10"
             >
-              &ldquo;When photography
-              <br />
-              is not all about
-              <br />
-              just taking photos,
-              <br />
-              <em className="text-gradient-gold not-italic">but telling a story.&rdquo;</em>
+              {headingLines.length > 1 ? (
+                <>
+                  {headingLines.slice(0, -1).map((line, i) => (
+                    <span key={i}>
+                      {i === 0 && <>&ldquo;</>}
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                  <em className="text-gradient-gold not-italic">{headingLines[headingLines.length - 1]}&rdquo;</em>
+                </>
+              ) : (
+                <>&ldquo;<em className="text-gradient-gold not-italic">{data.heading}</em>&rdquo;</>
+              )}
             </motion.h2>
 
-            <motion.p variants={fadeUp} className="text-[#aaa] text-base leading-relaxed mb-5">
-              I&apos;m Cherif Ouali — a photographer and visual artist living between
-              Tunisia and Paris. For six years I&apos;ve been chasing light: at dawn on
-              Mediterranean shores, in the warm gold of a Tunisian courtyard, in the
-              rain-slicked streets of the Marais at midnight.
-            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              className="rich-text text-[#aaa] text-base leading-relaxed mb-5"
+              dangerouslySetInnerHTML={{ __html: data.bio1 }}
+            />
 
-            <motion.p variants={fadeUp} className="text-[#666] text-sm leading-relaxed mb-12">
-              My work spans weddings, portraits, fashion, and fine art — but every image
-              shares the same intention: to preserve not just what happened, but how
-              it felt. With 157K followers trusting my eye on Instagram, and a second
-              account dedicated entirely to weddings&nbsp;
-              <span className="text-[#888]">(@cherifouali_weddings)</span>, storytelling
-              is the thread connecting everything I create.
-            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              className="rich-text text-[#666] text-sm leading-relaxed mb-12"
+              dangerouslySetInnerHTML={{ __html: data.bio2 }}
+            />
 
             {/* Stats */}
             <motion.div variants={fadeUp} className="grid grid-cols-2 gap-x-8 gap-y-7 mb-12">
-              {STATS.map(({ value, label }) => (
+              {data.stats.map(({ value, label }) => (
                 <div key={label} className="border-l border-white/10 pl-4 group">
                   <div className="font-display text-4xl text-white group-hover:text-[#d4af37] transition-colors duration-500 leading-none mb-1">
                     {value}
@@ -166,13 +174,13 @@ export default function About() {
               <div className="flex items-center gap-3">
                 <div className="w-8 h-px bg-[#d4af37]" />
                 <span className="text-[11px] tracking-[0.3em] uppercase text-[#888]">
-                  Based in Tunisia &amp; Paris
+                  {data.location}
                 </span>
               </div>
               <div className="flex items-center gap-2 glass rounded-full px-4 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-[#777]">
-                  Available for bookings
+                  {data.availabilityBadge}
                 </span>
               </div>
             </motion.div>

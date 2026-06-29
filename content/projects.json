@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "title": "Vows at First Light",
+    "category": "Wedding",
+    "year": "2024",
+    "description": "A dawn ceremony on the Tunisian coast — golden light breaking over the sea just as two lives became one. Every frame a quiet miracle.",
+    "image": "/L1021465.jpeg",
+    "tags": ["Wedding", "Golden Hour", "Coast"],
+    "featured": true
+  },
+  {
+    "id": "2",
+    "title": "Parisian Souls",
+    "category": "Portrait",
+    "year": "2024",
+    "description": "Intimate portrait sessions scattered across Paris — from Haussmann balconies to the quiet banks of the Seine at dusk.",
+    "image": "/L1020678.jpeg",
+    "tags": ["Portrait", "Paris", "Intimate"],
+    "featured": true
+  },
+  {
+    "id": "3",
+    "title": "Saharan Ceremony",
+    "category": "Wedding",
+    "year": "2024",
+    "description": "A desert wedding in southern Tunisia — ancient sand dunes, lanterns at dusk, and a silence that made every whisper eternal.",
+    "image": "/DSC_32x71.jpg",
+    "tags": ["Wedding", "Desert", "Tunisia"],
+    "featured": true
+  },
+  {
+    "id": "4",
+    "title": "Between Two Cities",
+    "category": "Fine Art",
+    "year": "2023",
+    "description": "A personal series exploring the visual contrast between Mediterranean light and Parisian shadow — two homes, one lens.",
+    "image": "/L1020370.jpeg",
+    "tags": ["Fine Art", "Series", "Identity"],
+    "featured": false
+  },
+  {
+    "id": "5",
+    "title": "The Quiet Ones",
+    "category": "Portrait",
+    "year": "2023",
+    "description": "Black-and-white portraits of artists in their natural environments — studios, stages, and solitary moments of creation.",
+    "image": "/_DSC0785.JPG",
+    "tags": ["Portrait", "B&W", "Artists"],
+    "featured": false
+  },
+  {
+    "id": "6",
+    "title": "Bloom & Lace",
+    "category": "Wedding",
+    "year": "2023",
+    "description": "A spring wedding in Tunis — jasmine in the hair, laughter in the courtyard, and light filtering through ancient wooden shutters.",
+    "image": "/_CAR1247.jpeg",
+    "tags": ["Wedding", "Spring", "Tunis"],
+    "featured": false
+  },
+  {
+    "id": "7",
+    "title": "Editorial Noir",
+    "category": "Fashion",
+    "year": "2023",
+    "description": "High-contrast fashion work shot across Parisian rooftops and Tunisian medinas — architecture and clothing in quiet dialogue.",
+    "image": "/Z62_5449.jpg",
+    "tags": ["Fashion", "Editorial", "Noir"],
+    "featured": false
+  },
+  {
+    "id": "8",
+    "title": "The Last Dance",
+    "category": "Wedding",
+    "year": "2022",
+    "description": "Capturing the most unguarded moment of a wedding day — when the music fades and two people hold each other a little longer.",
+    "image": "/L1031685.jpeg",
+    "tags": ["Wedding", "Dance", "Emotion"],
+    "featured": false
+  }
+]

@@ -1,4 +1,4 @@
-import { Project, Testimonial, Service, ProcessStep } from "@/types";
+import { Project, Testimonial, Service, ProcessStep, HeroContent, AboutContent, ContactContent, FooterContent } from "@/types";
 
 export const projects: Project[] = [
   {
@@ -192,3 +192,70 @@ export const processSteps: ProcessStep[] = [
       "Your gallery delivered in a private online space — high-resolution files, print-ready and web-optimised. With full licensing and archival quality that will last a lifetime, and beyond.",
   },
 ];
+
+// ─── Default CMS content (used as fallback when DB is empty) ─────────────────
+
+export const DEFAULT_HERO: HeroContent = {
+  eyebrow: "Photographer — Tunisia · Paris",
+  firstName: "Cherif",
+  lastName: "Ouali",
+  tagline: "When photography is not all about just taking photos, but telling a story.",
+  ctaPrimary:   { label: "Discover My Work", href: "#work" },
+  ctaSecondary: { label: "Book a Session",   href: "#contact" },
+  stats: [
+    { num: "180+", label: "Projects" },
+    { num: "12",   label: "Awards" },
+    { num: "8",    label: "Years" },
+  ],
+  copyright: "©2019 — 2025",
+};
+
+export const DEFAULT_ABOUT: AboutContent = {
+  heading: "When photography is not all about just taking photos, but telling a story.",
+  bio1: "I'm Cherif Ouali — a photographer and visual artist living between Tunisia and Paris. For six years I've been chasing light: at dawn on Mediterranean shores, in the warm gold of a Tunisian courtyard, in the rain-slicked streets of the Marais at midnight.",
+  bio2: "My work spans weddings, portraits, fashion, and fine art — but every image shares the same intention: to preserve not just what happened, but how it felt. With 157K followers trusting my eye on Instagram, and a second account dedicated entirely to weddings (@cherifouali_weddings), storytelling is the thread connecting everything I create.",
+  stats: [
+    { value: "157K", label: "Instagram followers" },
+    { value: "561+", label: "Stories captured" },
+    { value: "10",   label: "Years of experience" },
+    { value: "2",    label: "Countries, one vision" },
+  ],
+  location: "Based in Tunisia & Paris",
+  availabilityBadge: "Available for bookings",
+  photo: "/_CAR1188 copy.jpeg",
+};
+
+export const DEFAULT_CONTACT: ContactContent = {
+  headingLine1: "Let's Tell",
+  headingLine2: "Your Story",
+  headingLine3: "Together.",
+  email: "hello@CherifOuali.com",
+  location: "Tunisia · Paris",
+  locationNote: "Available for travel worldwide",
+  availabilityText: "Accepting wedding & portrait bookings for 2025–2026. Response within 24 hours via email or WhatsApp.",
+  socials: [
+    { type: "instagram",          href: "https://www.instagram.com/cherifouali",          label: "@cherifouali",         sub: "561 posts · 157K followers" },
+    { type: "instagram-weddings", href: "https://www.instagram.com/cherifouali_weddings", label: "@cherifouali_weddings", sub: "Wedding portfolio" },
+    { type: "whatsapp-tn",        href: "https://wa.me/21620802314",                      label: "+216 20 802 314",       sub: "WhatsApp available" },
+    { type: "whatsapp-fr",        href: "https://wa.me/33752999651",                      label: "+33 7 52 99 96 51",    sub: "WhatsApp available" },
+  ],
+};
+
+export const DEFAULT_FOOTER: FooterContent = {
+  name: "Cherif Ouali",
+  tagline: "Wedding & Fashion Photographer",
+  copyright: "©2019 — 2025 Cherif Ouali. All rights reserved.",
+  locationTag: "Photography Portfolio — Tunisia & Paris",
+  links: [
+    { label: "Work",     href: "#work" },
+    { label: "About",   href: "#about" },
+    { label: "Services",href: "#services" },
+    { label: "Contact", href: "#contact" },
+  ],
+  socials: [
+    { type: "instagram", href: "https://www.instagram.com/cherifouali",          label: "Instagram" },
+    { type: "weddings",  href: "https://www.instagram.com/cherifouali_weddings", label: "Weddings" },
+    { type: "whatsapp",  href: "https://wa.me/21620802314",                      label: "WhatsApp" },
+    { type: "email",     href: "mailto:hello@CherifOuali.com",                   label: "Email" },
+  ],
+};

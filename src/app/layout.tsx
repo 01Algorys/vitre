@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import CustomCursor from "@/components/ui/CustomCursor";
-import LoadingScreen from "@/components/ui/LoadingScreen";
+import { PortfolioShell } from "@/components/providers/PortfolioShell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,9 +41,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full bg-[#0a0a0a] text-white antialiased overflow-x-hidden">
-        <LoadingScreen />
-        <CustomCursor />
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <PortfolioShell>{children}</PortfolioShell>
       </body>
     </html>
   );

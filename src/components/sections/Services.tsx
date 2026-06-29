@@ -1,18 +1,25 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, Camera, User, Briefcase, ArrowUpRight } from "lucide-react";
-import { services } from "@/lib/data";
+import { Building2, Camera, User, Briefcase, Heart, Star, Film, Aperture, ArrowUpRight } from "lucide-react";
+import type { Service } from "@/types";
+import { services as defaultServices } from "@/lib/data";
 import { fadeUp, staggerContainer, viewportConfig } from "@/lib/animations";
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   building:  <Building2 size={20} />,
-  camera:    <Camera size={20} />,
-  user:      <User size={20} />,
+  camera:    <Camera    size={20} />,
+  user:      <User      size={20} />,
   briefcase: <Briefcase size={20} />,
+  heart:     <Heart     size={20} />,
+  star:      <Star      size={20} />,
+  film:      <Film      size={20} />,
+  aperture:  <Aperture  size={20} />,
 };
 
-export default function Services() {
+interface Props { services?: Service[] }
+
+export default function Services({ services = defaultServices }: Props) {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
@@ -84,8 +91,8 @@ export default function Services() {
               <motion.div
                 className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-[#d4af37]/20 rounded-tr-sm"
                 animate={{
-                  opacity:  hovered === service.id ? 1 : 0,
-                  scale:    hovered === service.id ? 1 : 0.7,
+                  opacity: hovered === service.id ? 1 : 0,
+                  scale:   hovered === service.id ? 1 : 0.7,
                 }}
                 transition={{ duration: 0.4 }}
               />
@@ -100,7 +107,7 @@ export default function Services() {
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    {ICON_MAP[service.icon]}
+                    {ICON_MAP[service.icon] ?? <Camera size={20} />}
                   </motion.div>
                   <span className="font-display text-5xl text-white/[0.06]">
                     {String(i + 1).padStart(2, "0")}
@@ -115,9 +122,11 @@ export default function Services() {
                   {service.title}
                 </h3>
 
-                <p className="text-[#666] text-sm leading-relaxed mb-8">{service.description}</p>
+                <div
+                  className="rich-text text-[#666] text-sm leading-relaxed mb-8"
+                  dangerouslySetInnerHTML={{ __html: service.description }}
+                />
 
-                {/* CTA row */}
                 <motion.div
                   className="flex items-center gap-2 text-[#d4af37] text-[10px] tracking-[0.25em] uppercase"
                   animate={{ x: hovered === service.id ? 4 : 0 }}

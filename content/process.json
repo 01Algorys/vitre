@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "number": "01",
+    "title": "Discovery",
+    "description": "We start with a conversation — not a form. I want to understand your story, your people, your vision. This first exchange shapes everything that follows and ensures what we create is authentically yours."
+  },
+  {
+    "id": "2",
+    "number": "02",
+    "title": "Planning",
+    "description": "Meticulous preparation: location scouting, timeline building, light planning, and mood direction. Great photography is made long before the shutter clicks — in the details that most photographers skip."
+  },
+  {
+    "id": "3",
+    "number": "03",
+    "title": "Shooting",
+    "description": "On the day, preparation dissolves into presence. I move quietly, observe deeply, and capture moments as they unfold — never staging what is real, always preserving what is true."
+  },
+  {
+    "id": "4",
+    "number": "04",
+    "title": "Editing",
+    "description": "Each image is treated as a unique artwork. My editing style is signature: rich tones, cinematic contrast, and a warmth that feels timeless rather than trendy. Every photo is hand-edited with care."
+  },
+  {
+    "id": "5",
+    "number": "05",
+    "title": "Delivery",
+    "description": "Your gallery delivered in a private online space — high-resolution files, print-ready and web-optimised. With full licensing and archival quality that will last a lifetime, and beyond."
+  }
+]

@@ -38,7 +38,42 @@ body {
   color: var(--text-primary);
   font-family: var(--font-inter), system-ui, sans-serif;
   overflow-x: hidden;
-  cursor: none;
+  cursor: none; /* custom cursor replaces system cursor on portfolio pages */
+}
+
+/* ── Admin: restore system cursor ───────────────────────────── */
+/* body has cursor: none for the custom portfolio cursor.
+   Override it for all admin routes using the .admin-layout wrapper. */
+
+/* Base: reset everything inside admin (higher specificity than .cursor-none) */
+.admin-layout,
+.admin-layout .cursor-none {
+  cursor: auto;
+}
+
+/* Interactive elements — specificity 0-1-1 beats Tailwind cursor-none (0-1-0) */
+.admin-layout a,
+.admin-layout button,
+.admin-layout [role="button"],
+.admin-layout select,
+.admin-layout label,
+.admin-layout [tabindex="0"] {
+  cursor: pointer;
+}
+.admin-layout input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+.admin-layout textarea,
+.admin-layout [contenteditable] {
+  cursor: text;
+}
+.admin-layout input[type="range"] {
+  cursor: ew-resize;
+}
+/* DnD grab handles */
+.admin-layout [aria-label="Drag to reorder"] {
+  cursor: grab;
+}
+.admin-layout [aria-label="Drag to reorder"]:active {
+  cursor: grabbing;
 }
 
 ::selection {
@@ -59,6 +94,21 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #d4af37;
 }
+
+/* ── Rich text output (from Tiptap) ─────────────────────────────── */
+/* Color and font-size are inherited from the wrapper — only spacing here */
+.rich-text p { margin-bottom: 0.75em; }
+.rich-text p:last-child { margin-bottom: 0; }
+.rich-text strong { font-weight: 600; }
+.rich-text em { font-style: italic; }
+.rich-text u { text-decoration: underline; }
+.rich-text a { color: #d4af37; text-decoration: underline; }
+.rich-text a:hover { opacity: 0.8; }
+.rich-text ul { list-style: disc; padding-left: 1.5em; margin-bottom: 0.75em; }
+.rich-text ol { list-style: decimal; padding-left: 1.5em; margin-bottom: 0.75em; }
+.rich-text li { margin-bottom: 0.25em; }
+.rich-text blockquote { border-left: 2px solid #d4af37; padding-left: 1em; font-style: italic; margin: 1em 0; opacity: 0.8; }
+.rich-text hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1em 0; }
 
 /* ── Typography ─────────────────────────────────────────────────── */
 
